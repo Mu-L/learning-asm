@@ -1,0 +1,45 @@
+---
+name: "Test examples"
+
+"on":
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - "master"
+
+concurrency:
+  cancel-in-progress: true
+  group: "${{ github.workflow }}-${{ github.ref }}"
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-run:
+    name: "${{ matrix.example }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      # Build and run every example even if one of them is broken.
+      fail-fast: false
+      matrix:
+        example:
+          - hello
+          - sum
+          - stack
+          - strings
+          - float
+          - casm1
+          - casm2
+          - casm3
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v7"
+      - name: "Install NASM"
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes nasm
+      - name: "Build and run the ${{ matrix.example }} example"
+        run: ./scripts/ci/test-examples.sh "${{ matrix.example }}"

@@ -122,6 +122,9 @@ _parse_first_float_vector:
         ;; Initialize the rsi register with the pointer to the place where
         ;; the strtod(3) will finish its work.
         mov rsi, end_buffer_1
+        ;; Preserve the pointer to the current floating-point value in the r12 register,
+        ;; because the strtod(3) may change it.
+        mov r12, rdi
         ;; Call the strtod(3) to convert a floating-point value from the input buffer to double representation.
         call strtod
 
@@ -129,7 +132,7 @@ _parse_first_float_vector:
         ;; in the rax register.
         mov rax, [rel end_buffer_1]
         ;; Check whether it is the end of the input string.
-        cmp rax, rdi
+        cmp rax, r12
         ;; Proceed with the second vector if we reached the end of the first vector.
         je _read_second_float_vector
 
@@ -199,6 +202,9 @@ _parse_second_float_vector:
         ;; Initialize the rsi register with the pointer which to the place where
         ;; the strtod(3) will finish its work.
         mov rsi, end_buffer_2
+        ;; Preserve the pointer to the current floating-point value in the r12 register,
+        ;; because the strtod(3) may change it.
+        mov r12, rdi
         ;; Call the strtod(3)
         call strtod
 
@@ -206,7 +212,7 @@ _parse_second_float_vector:
         ;; in the rax register.
         mov rax, [rel end_buffer_2]
         ;; Check whether it is the end of the input string.
-        cmp rax, rdi
+        cmp rax, r12
         ;; Calculate the dot product after we have both vectors.
         je _calculate_dot_product
         

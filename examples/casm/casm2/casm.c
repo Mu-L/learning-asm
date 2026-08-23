@@ -11,8 +11,9 @@ int main() {
                 "movq %1, %%rsi \n\t"     // rsi = str - Set the second argument of `sys_write` to the reference of the `str` variable.
                 "movq %2, %%rdx \n\t"     // rdx = len(str) - Set the third argument of `sys_write` to the length of the `str` variable's value.
                 "syscall"                 // Call the `sys_write` system call.
-                : "=g"(ret)               // Return the result in the `ret` variable.
-                : "g"(str), "g" (len));   // Put `str` and `len` variables in any general operand (memory, register, or immediate, if possible)
+                : "=a"(ret)               // Return the result of the system call from the `rax` register in the `ret` variable.
+                : "g"(str), "g" (len)     // Put `str` and `len` variables in any general operand (memory, register, or immediate, if possible)
+                : "rdi", "rsi", "rdx", "memory"); // Tell the compiler about the registers and the memory that the assembly code changes.
 
         printf("Bytes written: %d\n", ret);
         return 0;
