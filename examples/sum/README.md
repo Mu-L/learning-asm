@@ -8,4 +8,4 @@ To build the program, run:
 make
 ```
 
-For more details, read [Part 2. The `x86_64` concepts](https://github.com/0xAX/asm/blob/master/content/asm_2.md).
+For more details, read [Part 2. The `x86_64` concepts](../../content/asm_2.md).

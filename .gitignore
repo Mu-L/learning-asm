@@ -52,11 +52,11 @@ Mkfile.old
 dkms.conf
 
 # Our binaries
-hello/hello
-sum/sum
-stack/stack
-strings/reverse
-float/dot_product
-casm/casm1/casm
-casm/casm2/casm
-casm/casm3/casm
+examples/hello/hello
+examples/sum/sum
+examples/stack/stack
+examples/strings/reverse
+examples/float/dot_product
+examples/casm/casm1/casm
+examples/casm/casm2/casm
+examples/casm/casm3/casm

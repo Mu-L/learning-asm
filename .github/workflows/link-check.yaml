@@ -5,7 +5,7 @@ name: "Link Check"
       - "**"
   push:
     branches:
-      - "main"
+      - "master"
 
 concurrency:
   cancel-in-progress: true

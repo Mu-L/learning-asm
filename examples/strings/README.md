@@ -8,4 +8,4 @@ To build the program, run:
 make
 ```
 
-For more details, read [Part 4. Journey through the stack](https://github.com/0xAX/asm/blob/master/content/asm_4.md).
+For more details, read [Part 4. Data manipulation](../../content/asm_4.md).

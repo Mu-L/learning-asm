@@ -397,13 +397,16 @@ _parse_first_float_vector:
         ;; Initialize the rsi register with the pointer to the place where
         ;; the strtod(3) will finish its work.
         mov rsi, end_buffer_1
+        ;; Preserve the pointer to the current floating-point value in the r12 register,
+        ;; because the strtod(3) may change it.
+        mov r12, rdi
         ;; Call the strtod(3) to convert a floating-point value from the input buffer to double representation.
         call strtod
         ;; Preserve the pointer to the next floating-point value from the input buffer
         ;; in the rax register.
         mov rax, [rel end_buffer_1]
         ;; Check whether it is the end of the input string.
-        cmp rax, rdi
+        cmp rax, r12
         ;; Proceed with the second vector if we reached the end of the first vector.
         je _read_second_float_vector
         ;; Store the reference to the beginning of the buffer where we will store
@@ -440,7 +443,7 @@ As soon as we finish parsing the floating-point values for the first vector, we 
 - To store the number of values within the second vector, we will use the `r15` register instead of `r14`.
 
 > [!TIP]
-> For reference, you can find the whole code [here](https://github.com/0xAX/asm/blob/master/float/dot_product.asm).
+> For reference, you can find the whole code [here](../examples/float/dot_product.asm).
 
 ### Calculation of the dot product
 

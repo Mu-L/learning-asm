@@ -216,12 +216,18 @@ After defining the assembly code, we can specify input and output operands that 
 
 For example:
 
+- `a` - tells the compiler to use the `rax` register.
+- `b` - tells the compiler to use the `rbx` register.
+- `c` - tells the compiler to use the `rcx` register.
+- `d` - tells the compiler to use the `rdx` register.
+- `S` - tells the compiler to use the `rsi` register.
+- `D` - tells the compiler to use the `rdi` register.
 - `r` - tells the compiler to use a [general-purpose register](./asm_2.md).
 - `g` - tells the compiler to use any register, memory, or immediate integer operand.
 - `f` - tells the compiler to use a [floating-point register](./asm_6.md).
 - `m` - forces the compiler to use a memory location.
 
-You can find all the supported constraint strings in the [official documentation](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Output-Operands).
+You can find all the supported constraint strings in the official documentation. For more information, see the [Simple Constraints](https://gcc.gnu.org/onlinedocs/gcc/Simple-Constraints.html) and [Constraints for Particular Machines](https://gcc.gnu.org/onlinedocs/gcc/Machine-Constraints.html) documents.
 
 Let's try to rewrite our `hello world` program using the inline assembly:
 
@@ -239,13 +245,16 @@ int main() {
                 "movq %1, %%rsi \n\t"     // rsi = str - Set the second argument of `sys_write` to the reference of the `str` variable.
                 "movq %2, %%rdx \n\t"     // rdx = len(str) - Set the third argument of `sys_write` to the length of the `str` variable's value.
                 "syscall"                 // Call the `sys_write` system call.
-                : "=g"(ret)               // Return the result in the `ret` variable.
-                : "g"(str), "g" (len));   // Put `str` and `len` variables in any general operand (memory, register, or immediate, if possible)
+                : "=a"(ret)               // Return the result of the system call from the `rax` register in the `ret` variable.
+                : "g"(str), "g" (len)     // Put `str` and `len` variables in any general operand (memory, register, or immediate, if possible)
+                : "rdi", "rsi", "rdx", "memory"); // Tell the compiler about the registers and the memory that the assembly code changes.
 
         printf("Bytes written: %d\n", ret);
         return 0;
 }
 ```
+
+The last part of the assembly block is the list of clobbers. Here we tell the compiler which registers and memory our assembly code changes. The compiler does not analyze the assembly code, so without this list it may store its own values in the `rdi`, `rsi`, or `rdx` registers and lose them. We do not add `rax` to this list, because the `=a` output operand already describes it.
 
 > [!NOTE]
 > In the example above, we used [GNU `as` assembly](https://sourceware.org/binutils/docs/as.html), which has a slightly different syntax from the [NASM](https://nasm.us/) assembly. The main difference is that the order of operands for the `movq` instruction is reversed, and we move the value of the left operand to the right.

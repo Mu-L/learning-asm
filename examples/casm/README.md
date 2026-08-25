@@ -12,4 +12,4 @@ To build each program, go to its directory and run:
 make
 ```
 
-For more details, read [Part 7. Assembly interaction with high-level programming languages](https://github.com/0xAX/asm/blob/master/content/asm_7.md).
+For more details, read [Part 7. Assembly interaction with high-level programming languages](../../content/asm_7.md).

@@ -36,6 +36,26 @@ If you want to directly contribute to the project, create a pull reguest with th
 
 4. Open a pull request in GitHub. Fill the pull request template with the reason and description for the provided changes. Link your pull request with the existing issue, if applicable. After submitting your PR, wait for the review from the project maintainers.
 
+## Code examples
+
+The programs that accompany the chapters live in the [examples](./examples/) directory. Each of them is a standalone program with its own `Makefile` and `README.md`.
+
+If you change an example, or add a new one, check that it still builds and prints what the related chapter says it should print:
+
+```bash
+./scripts/ci/test-examples.sh
+```
+
+To check only some of the examples, pass their names:
+
+```bash
+./scripts/ci/test-examples.sh hello casm3
+```
+
+Besides the tools from the [Requirements](./README.md#requirements) section, the script needs [GCC](https://gcc.gnu.org/) to build the examples that interact with C, and [Python](https://www.python.org/) to run the examples that expect a terminal.
+
+When adding a new example, you also need to add a `test_<name>` function in the script and an entry in the `example` list of the [Examples](./.github/workflows/examples.yaml) workflow. The same script runs in continuous integration for every pull request, so a broken example fails the build.
+
 ## Review and approval process
 
 After you submit your PR, wait for the review. The project maintainers will evaluate your changes and provide feedback either using [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or pull request comments. Address the review suggestions and comments as soon as you can. If your PR looks good, the maintainers approve and merge it.

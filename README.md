@@ -1,6 +1,6 @@
 # Assembly programming
 
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa] [![Check Links](https://github.com/0xAX/asm/actions/workflows/link-check.yaml/badge.svg)](https://github.com/0xAX/asm/actions/workflows/link-check.yaml) [![star this repo](https://badgen.net/github/stars/0xAX/asm)](https://github.com/0xAX/asm) [![fork this repo](https://badgen.net/github/forks/0xAX/asm)](https://github.com/0xAX/asm/fork) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/0xAX/asm/issues)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa] [![Check Links](https://github.com/0xAX/asm/actions/workflows/link-check.yaml/badge.svg)](https://github.com/0xAX/asm/actions/workflows/link-check.yaml) [![Examples](https://github.com/0xAX/asm/actions/workflows/examples.yaml/badge.svg)](https://github.com/0xAX/asm/actions/workflows/examples.yaml) [![star this repo](https://badgen.net/github/stars/0xAX/asm)](https://github.com/0xAX/asm) [![fork this repo](https://badgen.net/github/forks/0xAX/asm)](https://github.com/0xAX/asm/fork) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/0xAX/asm/issues)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 This repository contains blog posts that introduce the [assembly](https://en.wikipedia.org/wiki/Assembly_language) programming language. For this moment, all the content and examples cover only the [x86_64](https://en.wikipedia.org/wiki/X86-64) processors and the GNU Linux operating system. In the future, I plan to post learning materials for the [ARM64](https://en.wikipedia.org/wiki/AArch64) architecture.
 
@@ -28,6 +28,8 @@ Here are links to each post:
 - [Part 5. Macros](https://github.com/0xAX/asm/blob/master/content/asm_5.md)
 - [Part 6. Floating-point arithmetic](https://github.com/0xAX/asm/blob/master/content/asm_6.md)
 - [Part 7. Assembly interaction with high-level programming languages](https://github.com/0xAX/asm/blob/master/content/asm_7.md)
+
+The code examples that accompany the chapters live in the [examples](./examples/) directory.
 
 ## Requirements
 
